@@ -4,9 +4,8 @@
 import * as React from 'react'
 
 function Board() {
-  const localStorageSquaresState = JSON.parse(window.localStorage.getItem('savedGameState'));
   // 🐨 squares is the state for this component. Add useState for squares
-  const [squares, setSquares] = React.useState(localStorageSquaresState || Array(9).fill(null));
+  const [squares, setSquares] = React.useState(Array(9).fill(null));
 
   // 🐨 We'll need the following bits of derived state:
   // - nextValue ('X' or 'O')
@@ -43,7 +42,6 @@ function Board() {
 
     // 🐨 set the squares to your copy
     setSquares(squaresCopy);
-    window.localStorage.setItem('savedGameState', JSON.stringify(squaresCopy));
   }
 
   React.useEffect(() => {
@@ -55,9 +53,7 @@ function Board() {
   function restart() {
     // 🐨 reset the squares
     // 💰 `Array(9).fill(null)` will do it!
-    const restartedSquares = Array(9).fill(null);
-    setSquares(restartedSquares);
-    window.localStorage.setItem('savedGameState', JSON.stringify(restartedSquares));
+    setSquares(Array(9).fill(null))
   }
 
   function renderSquare(i) {
